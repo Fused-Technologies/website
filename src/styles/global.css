@@ -170,3 +170,6 @@ p { margin: 0 0 1em; }
 .prose > :first-child { margin-top: 0; }
 .with-sidebar.blog-layout { grid-template-columns: minmax(0, 1fr) 340px; }
 @media (max-width: 960px) { .with-sidebar.blog-layout { grid-template-columns: 1fr; } }
+
+/* Never split a phone number across two lines */
+a[href^="tel:"] { white-space: nowrap; }
