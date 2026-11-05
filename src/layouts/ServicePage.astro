@@ -1,0 +1,65 @@
+---
+/* Shared layout for service pages (Security-First IT, VoIP) */
+import Base from './Base.astro';
+import PageHero from '../components/PageHero.astro';
+import NumberedList from '../components/NumberedList.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import QuickForm from '../components/QuickForm.astro';
+
+interface Item { title: string; text: string }
+interface Props {
+  page: {
+    seo: { title: string; description: string };
+    hero: { title: string; subtitle?: string; background?: string };
+    intro: { heading: string; paragraphs: string[]; subheading?: string; subParagraphs?: string[] };
+    services: { heading: string; items: Item[] };
+    testimonial?: number;
+    approach: { heading: string; intro?: string; items: Item[] };
+    closing?: { heading: string; paragraphs: string[] };
+  };
+}
+const { page } = Astro.props;
+---
+<Base title={page.seo.title} description={page.seo.description}>
+  <PageHero {...page.hero} />
+  <section class="section">
+    <div class="container with-sidebar">
+      <div class="with-sidebar__main">
+        <div class="text-block">
+          <h2>{page.intro.heading}</h2>
+          {page.intro.paragraphs.map((p) => <p>{p}</p>)}
+          {page.intro.subheading && <h3>{page.intro.subheading}</h3>}
+          {page.intro.subParagraphs?.map((p) => <p>{p}</p>)}
+        </div>
+
+        <div class="text-block">
+          <h2>{page.services.heading}</h2>
+          <NumberedList items={page.services.items} />
+        </div>
+
+        {page.testimonial !== undefined && <div><TestimonialCard index={page.testimonial} /></div>}
+
+        <div class="text-block">
+          <h2>{page.approach.heading}</h2>
+          {page.approach.intro && <p>{page.approach.intro}</p>}
+          <div class="item-list">
+            {page.approach.items.map((a) => (
+              <div>
+                <h3>{a.title}</h3>
+                <p>{a.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {page.closing && (
+          <div class="text-block">
+            <h2>{page.closing.heading}</h2>
+            {page.closing.paragraphs.map((p) => <p>{p}</p>)}
+          </div>
+        )}
+      </div>
+      <QuickForm />
+    </div>
+  </section>
+</Base>

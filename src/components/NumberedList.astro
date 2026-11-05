@@ -1,0 +1,33 @@
+---
+interface Props {
+  items: { title: string; text: string }[];
+}
+const { items } = Astro.props;
+---
+<ol class="numbered">
+  {items.map((item, i) => (
+    <li>
+      <span class="numbered__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+      <div class="numbered__body">
+        <h3>{item.title}</h3>
+        <p>{item.text}</p>
+      </div>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .numbered { list-style: none; margin: 0; padding: 0; display: grid; gap: 32px; }
+  .numbered__num {
+    display: block;
+    font-family: var(--font-sub);
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--green);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .numbered__body { border-left: 3px solid var(--green); padding-left: 20px; }
+  .numbered h3 { font-family: var(--font-sub); font-weight: 500; font-size: 1.3rem; margin-bottom: 10px; }
+  .numbered p { margin: 0; color: var(--text-muted); }
+</style>

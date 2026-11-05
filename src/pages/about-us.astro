@@ -1,0 +1,137 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import page from '../content/pages/about-us.json';
+import site from '../content/site.json';
+
+const { backstory, leader, reasons, cta } = page;
+const tel = (n: string) => 'tel:' + n.replace(/[^\d+]/g, '');
+---
+<Base title={page.seo.title} description={page.seo.description}>
+  <PageHero {...page.hero} />
+
+  <section class="section">
+    <div class="container backstory">
+      <img src={backstory.image} alt={backstory.imageAlt} width="660" height="526" />
+      <div class="text-block">
+        <h2>{backstory.heading}</h2>
+        {backstory.paragraphs.map((p) => <p>{p}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--gray">
+    <div class="container">
+      <div class="section-head"><h2>{leader.heading}</h2></div>
+      <div class="leader">
+        <figure class="leader__photo">
+          <img src={leader.image} alt={`${leader.name}, ${leader.role}`} width="335" height="319" loading="lazy" />
+          <figcaption>
+            <strong>{leader.name}</strong>
+            <span>{leader.role}</span>
+          </figcaption>
+        </figure>
+        <div class="text-block">
+          <h3 class="leader__sub">{leader.subheading}</h3>
+          {leader.paragraphs.map((p) => <p>{p}</p>)}
+          <p class="leader__call">
+            {leader.callPrefix} <a href={tel(site.sales.phone)}>{site.sales.phone}</a> {leader.callSuffix}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><h2>{reasons.heading}</h2></div>
+      <div class="reasons">
+        {reasons.items.map((r) => (
+          <article class="reason">
+            <img src={r.icon} alt="" width="54" height="54" />
+            <h3>{r.title}</h3>
+            <p>{r.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner {...cta} />
+</Base>
+
+<style>
+  .backstory {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .backstory img {
+    width: 100%;
+    aspect-ratio: 5 / 4;
+    object-fit: cover;
+    border-radius: 0 0 80px 0;
+  }
+
+  .leader {
+    display: grid;
+    grid-template-columns: 335px 1fr;
+    gap: 56px;
+    align-items: start;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .leader__photo { position: relative; margin: 0 0 40px; }
+  .leader__photo img { width: 100%; border-radius: 0 60px 0 0; background: #ddd; }
+  .leader__photo figcaption {
+    position: absolute;
+    left: 40px;
+    right: 0;
+    bottom: -40px;
+    background: var(--white);
+    border-right: 4px solid var(--green);
+    box-shadow: 0 10px 30px rgba(16, 24, 40, 0.12);
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .leader__photo strong {
+    display: block;
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-size: 1.05rem;
+  }
+  .leader__photo span { font-size: 0.85rem; color: var(--text-muted); }
+  .text-block .leader__sub {
+    color: var(--blue);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-top: 0;
+  }
+  .text-block .leader__call { color: var(--text); font-weight: 600; }
+  .leader__call a { color: var(--green); text-decoration: none; }
+  .leader__call a:hover { text-decoration: underline; }
+
+  .reasons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .reason { background: var(--green-tint); border-radius: var(--radius); padding: 32px 32px 36px; }
+  .reason img { width: 54px; height: 54px; margin-bottom: 24px; }
+  .reason h3 { font-family: var(--font-sub); font-weight: 500; font-size: 1.3rem; }
+  .reason p { margin: 0; color: var(--text-muted); font-size: 0.95rem; }
+
+  @media (max-width: 900px) {
+    .backstory { grid-template-columns: 1fr; gap: 32px; }
+    .leader { grid-template-columns: 1fr; gap: 64px; }
+    .leader__photo { max-width: 335px; margin: 0 auto; }
+    .reasons { grid-template-columns: 1fr; }
+    .reason { padding: 28px 24px; }
+  }
+</style>

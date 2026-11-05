@@ -1,0 +1,63 @@
+---
+import { getPosts } from '../lib/posts';
+import ContactForm from './ContactForm.astro';
+import site from '../content/site.json';
+
+interface Props { currentSlug?: string; showSearch?: boolean }
+const { currentSlug, showSearch = false } = Astro.props;
+const posts = (await getPosts())
+  .filter((p) => p.id !== currentSlug)
+  .slice(0, 3);
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const tel = (n: string) => 'tel:' + n.replace(/[^\d+]/g, '');
+---
+<aside class="bside">
+  {showSearch && (
+    <div class="bside__search">
+      <label class="visually-hidden" for="blog-search">Search posts</label>
+      <input id="blog-search" type="search" placeholder="Search" autocomplete="off" />
+    </div>
+  )}
+
+  <div class="bside__help">
+    <h2>We Can Help</h2>
+    <p>Call us at <a href={tel(site.sales.phone)}>{site.sales.phone}</a> or fill out the form below.</p>
+    <ContactForm name="blog-contact" compact />
+  </div>
+
+  <div class="bside__featured">
+    <h2>Featured Posts</h2>
+    <ul>
+      {posts.map((p) => (
+        <li>
+          <a href={`/blog/b/${p.id}`}>
+            <img src={p.data.image} alt="" width="58" height="58" loading="lazy" />
+            <span>
+              <strong>{p.data.title}</strong>
+              <small>{p.data.category} | {fmt(p.data.date)}</small>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</aside>
+
+<style>
+  .bside { display: grid; gap: 48px; }
+  .bside__search input {
+    font: inherit; width: 100%; padding: 14px 16px;
+    border: 1px solid var(--border); border-radius: 4px;
+  }
+  .bside h2 { font-size: 1.5rem; text-align: center; margin-bottom: 12px; }
+  .bside__help > p { text-align: center; font-size: 0.95rem; color: var(--text-muted); }
+  .bside__help a { color: var(--green); text-decoration: none; }
+  .bside__featured h2 { text-align: left; font-size: 1.3rem; }
+  .bside__featured ul { list-style: none; margin: 0; padding: 0; }
+  .bside__featured li + li { border-top: 1px solid var(--border); }
+  .bside__featured a { display: flex; gap: 14px; padding: 16px 0; text-decoration: none; }
+  .bside__featured img { width: 58px; height: 58px; object-fit: cover; border-radius: 6px; flex-shrink: 0; }
+  .bside__featured strong { display: block; font-family: var(--font-heading); font-weight: 600; font-size: 0.95rem; line-height: 1.35; }
+  .bside__featured a:hover strong { color: var(--green); }
+  .bside__featured small { color: var(--text-muted); font-size: 0.8rem; }
+</style>

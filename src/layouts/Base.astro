@@ -2,15 +2,19 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { cleanPath } from '../lib/url';
 
 interface Props {
   title: string;
   description?: string;
   image?: string;
+  /** Landing-page header: logo + heading, no menu (used on the booking page) */
+  minimalHeader?: string;
+  noindex?: boolean;
 }
 
-const { title, description = '', image = '/images/logo.png' } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site);
+const { title, description = '', image = '/images/logo.png', minimalHeader, noindex = false } = Astro.props;
+const canonical = new URL(cleanPath(Astro.url.pathname), Astro.site);
 ---
 <!doctype html>
 <html lang="en">
@@ -26,10 +30,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     {description && <meta property="og:description" content={description} />}
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL(image, Astro.site)} />
+    {noindex && <meta name="robots" content="noindex" />}
     <slot name="head" />
   </head>
   <body>
-    <Header />
+    <Header minimal={minimalHeader} />
     <main>
       <slot />
     </main>

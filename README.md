@@ -11,7 +11,14 @@ Page text, images and links live in JSON files, separate from the layout:
 | --- | --- |
 | `src/content/site.json` | Phone numbers, emails, navigation, footer links, social links |
 | `src/content/home.json` | All homepage sections |
+| `src/content/pages/*.json` | About, Security-First IT, VoIP, Reviews, Support Center and booking pages |
 | `src/content/testimonials.json` | Client testimonials (used on several pages) |
+| `src/content/blog/*.md` | Blog posts (one Markdown file per post) |
+| `src/content/legal/*.md` | Privacy Policy and SMS Privacy Policy |
+
+To add a blog post, copy an existing file in `src/content/blog/`, change the details at
+the top (title, date, category, image) and replace the text. The file name becomes the
+address: `my-post.md` is published at `/blog/b/my-post`.
 
 A visual editor (TinaCMS) will be connected to these files so content can be changed
 without touching code.
@@ -26,6 +33,14 @@ npm run dev
 ```
 
 Then open http://localhost:4321.
+
+## Forms
+
+The booking form (`/schedule-an-appointment`) and the blog "We Can Help" form use
+[Netlify Forms](https://docs.netlify.com/forms/setup/). Once the site is on Netlify,
+submissions appear under **Site → Forms**; turn on email notifications there.
+The sidebar "Schedule an Appointment Today" form passes the visitor's name and email
+to the booking form.
 
 ## Deploying
 

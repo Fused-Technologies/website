@@ -1,0 +1,51 @@
+{
+  "seo": {
+    "title": "About Us | Fused Technologies",
+    "description": "Since 2006, Fused Technologies has brought enterprise-class, security-first IT services to small and medium-sized businesses in Washington."
+  },
+  "hero": {
+    "title": "About Us",
+    "subtitle": "We empower Washington businesses with IT solutions that simplify, secure, and optimize their operations"
+  },
+  "backstory": {
+    "heading": "Our Backstory",
+    "image": "/images/about-backstory.jpg",
+    "imageAlt": "A Fused Technologies technician working at his desk",
+    "paragraphs": [
+      "Fused Technologies was founded in 2006 with a clear goal: to bring enterprise-class IT services to small and medium-sized businesses. Frustrated by the limitations of one-size-fits-all solutions, we built our company on the belief that IT should be tailored to fit the unique challenges and goals of every client.",
+      "Our journey started by focusing on simplifying technology, ensuring uptime, and delivering unparalleled customer satisfaction. Over the years, we’ve grown to serve clients across multiple states, staying true to our mission of providing reliable, security-first IT solutions that help businesses thrive. Today, we continue to address the evolving IT needs of businesses in Washington, keeping their operations running smoothly and securely."
+    ]
+  },
+  "leader": {
+    "heading": "We're Dedicated to Delivering IT that Works",
+    "name": "Todd Varriano",
+    "role": "CEO, Fused Technologies",
+    "image": "/images/about-ceo.jpg",
+    "subheading": "We've Got Your Back",
+    "paragraphs": [
+      "Your business deserves reliable support at every moment. That’s why when you call us during business hours, you’ll always speak to a real person—no frustrating voicemails or endless menus. From 5:00 AM to 6:00 PM, our receptionist ensures your needs are promptly routed to the right team.",
+      "Our commitment doesn’t stop there. Our Help Desk is ready to resolve technical problems until 7:00 PM, Monday through Friday. Plus, with 24x7x365 network monitoring by our Network Operations Center, we identify and address issues before they escalate. If something requires immediate action, rest assured—we’ll begin resolving it within the hour."
+    ],
+    "callPrefix": "Call",
+    "callSuffix": "for comprehensive security-first IT services tailored to your needs."
+  },
+  "reasons": {
+    "heading": "Why Our Clients Stay with Us",
+    "items": [
+      { "icon": "/images/icons/ribbon-star.svg", "title": "No Long-Term Contracts Required", "text": "We earn your trust through exceptional service, not restrictive agreements. Our clients stay because we deliver value every day, not because they’re locked into contracts." },
+      { "icon": "/images/icons/gear-bulb.svg", "title": "Tailored IT Solutions that Work", "text": "We design IT strategies around your unique needs, ensuring you receive exactly what your business requires without paying for unnecessary services." },
+      { "icon": "/images/icons/umbrella.svg", "title": "Proactive IT Problem Solving", "text": "We identify and resolve potential issues before they disrupt your operations. Our proactive approach minimizes downtime and keeps your business productive." },
+      { "icon": "/images/icons/headset.svg", "title": "Responsive, Human Support", "text": "When you contact us, you’ll speak directly to a knowledgeable professional. We prioritize clear communication and effective solutions without relying on automated systems." },
+      { "icon": "/images/icons/shield-network.svg", "title": "Advanced Cybersecurity Solutions", "text": "We integrate robust cybersecurity measures into every service, safeguarding your business against evolving threats and ensuring compliance with industry standards." },
+      { "icon": "/images/icons/briefcase-cycle.svg", "title": "Reliable Business Continuity", "text": "From disaster recovery to secure backups, we prioritize keeping your operations running smoothly, even in the face of unexpected challenges." }
+    ]
+  },
+  "cta": {
+    "heading": "Let’s Build a Reliable IT Environment for Your Business",
+    "text": "At Fused Technologies, we believe IT should empower your business, not complicate it. With our focus on simplifying technology, improving security, and optimizing operations, we work alongside you to create systems that support your goals and enhance productivity.",
+    "callout": "Call (855) 607-0241 today or click the button below to schedule your appointment. We’re ready to jumpstart your IT journey.",
+    "image": "/images/about-cta.jpg",
+    "imageAlt": "A Fused Technologies technician working on a laptop in the office",
+    "buttonLabel": "Schedule a Call"
+  }
+}

@@ -1,0 +1,35 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  background?: string;
+}
+const { title, subtitle, background = '/images/page-header.jpg' } = Astro.props;
+---
+<section class="page-hero" style={`--page-hero-bg: url('${background}')`}>
+  <div class="container">
+    <h1>{title}</h1>
+    {subtitle && <p>{subtitle}</p>}
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    /* Header photos already include the brand tint */
+    background: var(--navy) var(--page-hero-bg) center / cover no-repeat;
+    color: var(--white);
+    text-align: center;
+    padding: 250px 0 90px;
+  }
+  .page-hero h1 { font-size: clamp(2.2rem, 4vw, 3rem); margin-bottom: 18px; }
+  .page-hero p {
+    font-family: var(--font-sub);
+    font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+    max-width: 960px;
+    margin: 0 auto;
+    opacity: 0.95;
+  }
+  @media (max-width: 1024px) {
+    .page-hero { padding: 150px 0 64px; }
+  }
+</style>

@@ -1,0 +1,18 @@
+---
+import { getPosts } from '../../lib/posts';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import PostList from '../../components/PostList.astro';
+import BlogSidebar from '../../components/BlogSidebar.astro';
+
+const posts = (await getPosts());
+---
+<Base title="Blog | Fused Technologies" description="IT and cybersecurity insights for Washington businesses from the Fused Technologies team.">
+  <PageHero title="Blog" />
+  <section class="section">
+    <div class="container with-sidebar blog-layout">
+      <div><PostList posts={posts} /></div>
+      <BlogSidebar showSearch />
+    </div>
+  </section>
+</Base>

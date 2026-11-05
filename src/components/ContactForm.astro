@@ -1,0 +1,101 @@
+---
+/*
+ * Main lead form. Submissions are collected by Netlify Forms when the site is
+ * hosted on Netlify (they appear under Site > Forms, with email notifications
+ * available). The hidden "bot-field" input is a spam honeypot.
+ */
+interface Props {
+  name?: string;
+  compact?: boolean;
+  buttonLabel?: string;
+}
+const { name = 'schedule-appointment', compact = false, buttonLabel = 'Schedule Now' } = Astro.props;
+const id = (f: string) => `${name}-${f}`;
+---
+<form
+  class:list={['cform', { 'cform--compact': compact }]}
+  name={name}
+  method="POST"
+  action="/thank-you"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+>
+  <input type="hidden" name="form-name" value={name} />
+  <p class="visually-hidden"><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+
+  <div class="cform__row">
+    <label for={id('name')}>Name <span aria-hidden="true">*</span></label>
+    <input id={id('name')} name="name" type="text" autocomplete="name" required />
+  </div>
+  <div class="cform__row">
+    <label for={id('org')}>Organization</label>
+    <input id={id('org')} name="organization" type="text" autocomplete="organization" />
+  </div>
+  <div class="cform__row">
+    <label for={id('email')}>Email <span aria-hidden="true">*</span></label>
+    <input id={id('email')} name="email" type="email" autocomplete="email" required />
+  </div>
+  <div class="cform__row">
+    <label for={id('phone')}>Phone <span aria-hidden="true">*</span></label>
+    <input id={id('phone')} name="phone" type="tel" autocomplete="tel" required />
+  </div>
+  <div class="cform__row cform__row--full">
+    <label for={id('message')}>How can we help?</label>
+    <textarea id={id('message')} name="message" rows={compact ? 4 : 5}></textarea>
+  </div>
+  <p class="cform__terms cform__row--full">
+    By submitting this form, you agree to our <a href="/sms-privacy-policy">SMS Privacy Policy</a>.
+  </p>
+  <label class="cform__check cform__row--full">
+    <input type="checkbox" name="agree-terms" value="yes" required />
+    I agree to these terms.
+  </label>
+  <button type="submit" class="btn btn--green cform__row--full">{buttonLabel}</button>
+</form>
+
+<script>
+  // Pre-fill from the sidebar quick form (?name=...&email=...)
+  const params = new URLSearchParams(location.search);
+  document.querySelectorAll<HTMLFormElement>('form.cform').forEach((form) => {
+    for (const key of ['name', 'email']) {
+      const value = params.get(key);
+      const input = form.querySelector<HTMLInputElement>(`input[name="${key}"]`);
+      if (value && input && !input.value) input.value = value;
+    }
+  });
+</script>
+
+<style>
+  .cform {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 20px;
+    background: var(--green-tint);
+    border-radius: var(--radius);
+    padding: 36px 32px;
+  }
+  .cform--compact { grid-template-columns: 1fr; padding: 24px 20px; gap: 14px; }
+  .cform__row { display: grid; gap: 6px; }
+  .cform__row--full { grid-column: 1 / -1; }
+  .cform label { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+  .cform label span { color: var(--red); }
+  .cform input:not([type='checkbox']),
+  .cform textarea {
+    font: inherit;
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--white);
+  }
+  .cform textarea { resize: vertical; }
+  .cform__terms { margin: 0; font-size: 0.85rem; color: var(--text-muted); }
+  .cform__terms a { color: var(--blue); }
+  .cform__check { display: flex; align-items: center; gap: 10px; font-weight: 400 !important; }
+  .cform__check input { width: 18px; height: 18px; accent-color: var(--green); }
+  .cform .btn { width: 100%; padding: 18px; font-size: 1rem; letter-spacing: 0.08em; }
+
+  @media (max-width: 640px) {
+    .cform { grid-template-columns: 1fr; padding: 24px 18px; }
+  }
+</style>

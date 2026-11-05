@@ -10,3 +10,20 @@
   from = "/home"
   to = "/"
   status = 301
+
+# Old HighLevel blog category URLs
+[[redirects]]
+  from = "/blog/c/Cybersecurity"
+  to = "/blog/c/cybersecurity"
+  status = 301
+
+[[redirects]]
+  from = "/blog/c/IT%20Services"
+  to = "/blog/c/it-services"
+  status = 301
+
+# Old HighLevel sitemap location
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap-index.xml"
+  status = 301

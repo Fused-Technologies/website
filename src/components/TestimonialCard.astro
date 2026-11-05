@@ -1,0 +1,55 @@
+---
+import testimonials from '../content/testimonials.json';
+
+interface Props {
+  index: number;
+  full?: boolean;
+}
+const { index, full = false } = Astro.props;
+const t = testimonials[index];
+---
+{t && (
+  <figure class="tcard">
+    <img class="tcard__mark" src="/images/icons/quote-mark.svg" alt="" width="84" height="56" />
+    <img class="tcard__stars" src="/images/icons/stars.svg" alt="5 out of 5 stars" width="96" height="18" />
+    <blockquote>"{full ? t.fullQuote : t.quote}"</blockquote>
+    <figcaption>
+      <img src={t.avatar} alt="" width="48" height="48" />
+      <div>
+        <strong>{t.name}</strong>
+        <span>{t.role}</span>
+      </div>
+    </figcaption>
+  </figure>
+)}
+
+<style>
+  .tcard {
+    position: relative;
+    margin: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px 28px 32px;
+    background: var(--white);
+  }
+  .tcard__mark { position: absolute; top: -1px; right: 20px; width: 84px; }
+  .tcard__stars { width: 96px; margin-bottom: 18px; position: relative; }
+  .tcard blockquote {
+    position: relative;
+    margin: 0 0 24px;
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--text-muted);
+  }
+  .tcard figcaption { display: flex; align-items: center; gap: 14px; }
+  .tcard figcaption img { width: 48px; height: 48px; flex-shrink: 0; }
+  .tcard strong {
+    display: block;
+    font-family: var(--font-sub);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-size: 0.9rem;
+  }
+  .tcard span { font-size: 0.85rem; color: var(--text-muted); }
+</style>

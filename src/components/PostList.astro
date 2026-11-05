@@ -1,0 +1,60 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { posts: CollectionEntry<'blog'>[] }
+const { posts } = Astro.props;
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+---
+<div class="plist">
+  {posts.map((p) => (
+    <article class="pitem" data-search={`${p.data.title} ${p.data.description} ${p.data.category}`.toLowerCase()}>
+      <a href={`/blog/b/${p.id}`} class="pitem__img" tabindex="-1" aria-hidden="true">
+        <img src={p.data.image} alt="" width="278" height="237" loading="lazy" />
+      </a>
+      <div>
+        <h2><a href={`/blog/b/${p.id}`}>{p.data.title}</a></h2>
+        <p class="pitem__meta">
+          <a href={`/blog/c/${slugify(p.data.category)}`}>{p.data.category}</a>
+          <span aria-hidden="true">|</span>
+          <time datetime={p.data.date.toISOString()}>{fmt(p.data.date)}</time>
+        </p>
+        <p>{p.data.description}</p>
+        <a href={`/blog/b/${p.id}`} class="text-link">[Read more]<span class="visually-hidden"> about {p.data.title}</span></a>
+      </div>
+    </article>
+  ))}
+  <p class="plist__empty" hidden>No posts match your search.</p>
+</div>
+
+<script>
+  const input = document.getElementById('blog-search') as HTMLInputElement | null;
+  input?.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    let shown = 0;
+    document.querySelectorAll<HTMLElement>('.pitem').forEach((el) => {
+      const match = !q || (el.dataset.search ?? '').includes(q);
+      el.hidden = !match;
+      if (match) shown++;
+    });
+    const empty = document.querySelector<HTMLElement>('.plist__empty');
+    if (empty) empty.hidden = shown > 0;
+  });
+</script>
+
+<style>
+  .plist { display: grid; gap: 48px; }
+  .pitem { display: grid; grid-template-columns: 240px 1fr; gap: 32px; }
+  .pitem[hidden] { display: none; }
+  .pitem__img img { width: 100%; aspect-ratio: 1 / 0.9; object-fit: cover; border-radius: 12px; }
+  .pitem h2 { font-size: 1.5rem; margin-bottom: 10px; }
+  .pitem h2 a { text-decoration: none; }
+  .pitem h2 a:hover { color: var(--green); }
+  .pitem__meta { display: flex; gap: 10px; font-weight: 600; font-size: 0.95rem; margin-bottom: 12px; }
+  .pitem__meta a { text-decoration: none; }
+  .pitem__meta a:hover { color: var(--green); }
+  .pitem__meta span { color: var(--border); }
+  .pitem p { color: var(--text-muted); font-size: 0.95rem; }
+  @media (max-width: 640px) {
+    .pitem { grid-template-columns: 1fr; gap: 18px; }
+  }
+</style>

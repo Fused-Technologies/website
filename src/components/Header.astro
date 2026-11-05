@@ -1,9 +1,21 @@
 ---
 import site from '../content/site.json';
+import { cleanPath } from '../lib/url';
 
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const { minimal } = Astro.props as { minimal?: string };
+const path = cleanPath(Astro.url.pathname);
 const tel = (n: string) => 'tel:' + n.replace(/[^\d+]/g, '');
 ---
+{minimal ? (
+<header class="header-min">
+  <div class="container header-min__inner">
+    <a href="/" class="header__logo" aria-label={`${site.name} home`}>
+      <img src="/images/logo.png" alt={site.name} width="200" height="59" />
+    </a>
+    <p class="header-min__title">{minimal}</p>
+  </div>
+</header>
+) : (<>
 <div class="topbar">
   <div class="container topbar__inner">
     <nav class="topbar__links" aria-label="Secondary">
@@ -41,6 +53,7 @@ const tel = (n: string) => 'tel:' + n.replace(/[^\d+]/g, '');
     </nav>
   </div>
 </header>
+</>)}
 
 <script>
   const toggle = document.querySelector<HTMLButtonElement>('.header__toggle');
@@ -153,4 +166,14 @@ const tel = (n: string) => 'tel:' + n.replace(/[^\d+]/g, '');
     .header__mobile-extra a { text-decoration: none; color: rgba(255, 255, 255, 0.85); }
   }
   :global(body.nav-open) { overflow: hidden; }
+
+  .header-min { background: var(--navy); color: var(--white); }
+  .header-min__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 140px; }
+  .header-min .header__logo img { width: 200px; }
+  .header-min__title { margin: 0; font-family: var(--font-heading); font-weight: 600; font-size: clamp(1.1rem, 2vw, 1.6rem); text-align: right; }
+  @media (max-width: 640px) {
+    .header-min__inner { flex-direction: column; justify-content: center; min-height: 0; padding-top: 24px; padding-bottom: 24px; gap: 12px; }
+    .header-min .header__logo img { width: 160px; }
+    .header-min__title { text-align: center; }
+  }
 </style>

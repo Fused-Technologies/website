@@ -1,0 +1,77 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import PageHero from '../../../components/PageHero.astro';
+import BlogSidebar from '../../../components/BlogSidebar.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+const d = post.data;
+const fmt = (x: Date) => x.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: d.title,
+  description: d.description,
+  image: new URL(d.image, Astro.site).toString(),
+  datePublished: d.date.toISOString(),
+  author: { '@type': 'Organization', name: 'Fused Technologies' },
+  publisher: { '@type': 'Organization', name: 'Fused Technologies' },
+};
+---
+<Base title={`${d.title} | Fused Technologies`} description={d.description} image={d.image}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <PageHero title="Blog" />
+  <section class="section">
+    <div class="container with-sidebar blog-layout">
+      <article>
+        <img class="post__img" src={d.image} alt={d.imageAlt} width="770" height="407" />
+        <h1 class="post__title">{d.title}</h1>
+        <p class="post__meta">
+          <a href={`/blog/c/${slugify(d.category)}`}>{d.category}</a>
+          <span aria-hidden="true">|</span>
+          <time datetime={d.date.toISOString()}>{fmt(d.date)}</time>
+          <span aria-hidden="true">•</span>
+          <span>{d.readTime} min read</span>
+        </p>
+        <div class="prose"><Content /></div>
+
+        <div class="post__author">
+          <img src="/images/blog/author-help-desk.jpg" alt="" width="64" height="64" loading="lazy" />
+          <div>
+            <strong>{d.author}</strong>
+            <p>We're fully dedicated to assisting local businesses in improving their technology to gain a competitive edge in their industries. Our team of dedicated professionals are focused on delivering exceptional IT services and solutions. With extensive expertise and practical experience, we ensure that our clients receive top-quality support and guidance for their IT projects.</p>
+          </div>
+        </div>
+        <p><a href="/blog" class="text-link">← Back to Blog</a></p>
+      </article>
+      <BlogSidebar currentSlug={post.id} />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .post__img { width: 100%; aspect-ratio: 770 / 407; object-fit: cover; border-radius: 16px; margin-bottom: 36px; }
+  .post__title { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 700; margin-bottom: 12px; }
+  .post__meta { display: flex; flex-wrap: wrap; gap: 10px; font-weight: 600; margin-bottom: 32px; }
+  .post__meta a { text-decoration: none; }
+  .post__meta a:hover { color: var(--green); }
+  .post__meta span[aria-hidden] { color: var(--border); }
+  .post__author {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin: 48px 0 24px;
+    padding: 28px;
+    background: var(--gray-bg);
+    border-radius: var(--radius);
+  }
+  .post__author img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+  .post__author strong { font-family: var(--font-heading); }
+  .post__author p { margin: 6px 0 0; color: var(--text-muted); font-size: 0.95rem; }
+</style>

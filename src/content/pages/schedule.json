@@ -1,0 +1,15 @@
+{
+  "seo": {
+    "title": "Schedule an Appointment | Fused Technologies",
+    "description": "Schedule a call with Fused Technologies. Tell us about your IT needs and we’ll follow up to discuss next steps."
+  },
+  "heading": "Schedule an Appointment with Us",
+  "stepLabel": "Step 1:",
+  "stepTitle": "Schedule an Appointment",
+  "steps": [
+    "Fill in our quick form or schedule a call with us.",
+    "We’ll take the time to listen and understand your situation.",
+    "If we’re a good fit to help, we’ll let you know the general costs and next steps."
+  ],
+  "testimonials": [0, 1]
+}

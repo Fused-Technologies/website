@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import site from '../content/site.json';
+
+const tel = (n: string) => 'tel:' + n.replace(/[^\d+]/g, '');
+---
+<Base title="Thank You | Fused Technologies" description="Thanks for contacting Fused Technologies." noindex>
+  <PageHero title="Thank You" subtitle="We’ve received your request." />
+  <section class="section">
+    <div class="container thanks">
+      <h2>We’ll be in touch shortly</h2>
+      <p>
+        A member of our team will reach out soon to schedule your introductory call.
+        If you need help right away, call us at
+        <a href={tel(site.sales.phone)}>{site.sales.phone}</a>.
+      </p>
+      <p>
+        Existing clients needing technical support can reach the help desk at
+        <a href={tel(site.clientSupport.phone)}>{site.clientSupport.phone}</a> or
+        <a href={`mailto:${site.clientSupport.email}`}>{site.clientSupport.email}</a>.
+      </p>
+      <a href="/" class="btn btn--green">Back to Home</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .thanks { max-width: 720px; text-align: center; }
+  .thanks p { color: var(--text-muted); font-size: 1.05rem; }
+  .thanks a:not(.btn) { color: var(--green); font-weight: 600; }
+  .thanks .btn { margin-top: 20px; }
+</style>

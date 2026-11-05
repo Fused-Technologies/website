@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import QuickForm from '../components/QuickForm.astro';
+import page from '../content/pages/reviews.json';
+import testimonials from '../content/testimonials.json';
+---
+<Base title={page.seo.title} description={page.seo.description}>
+  <PageHero {...page.hero} />
+  <section class="section">
+    <div class="container with-sidebar">
+      <div class="with-sidebar__main">
+        <div class="text-block">
+          <h2>{page.heading}</h2>
+          <p>{page.intro}</p>
+          <p class="lead">{page.lead}</p>
+        </div>
+        <div class="stack">
+          {testimonials.map((_, i) => <TestimonialCard index={i} full />)}
+        </div>
+      </div>
+      <QuickForm heading="Schedule an Appointment" />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .text-block .lead { color: var(--text); font-weight: 600; font-size: 1.05rem; }
+  .with-sidebar__main > .stack { margin-top: 32px; }
+  .stack { display: grid; gap: 28px; }
+</style>

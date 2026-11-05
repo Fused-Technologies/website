@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactForm from '../components/ContactForm.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import page from '../content/pages/schedule.json';
+---
+<Base title={page.seo.title} description={page.seo.description} minimalHeader={page.heading}>
+  <section class="section">
+    <div class="container booking">
+      <div>
+        <h1 class="booking__title"><strong>{page.stepLabel}</strong> {page.stepTitle}</h1>
+        <div class="booking__progress" aria-hidden="true"><span></span></div>
+        <ul class="booking__steps">{page.steps.map((s) => <li>{s}</li>)}</ul>
+        <ContactForm name="schedule-appointment" />
+      </div>
+      <aside class="booking__side" aria-label="What our clients say">
+        {page.testimonials.map((i) => <TestimonialCard index={i} />)}
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .booking {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 56px;
+    align-items: start;
+  }
+  .booking__title { font-size: clamp(1.6rem, 2.6vw, 2rem); font-weight: 400; margin-bottom: 20px; }
+  .booking__title strong { font-weight: 700; }
+  .booking__progress { height: 8px; background: var(--green-tint); border-radius: 8px; overflow: hidden; margin-bottom: 36px; }
+  .booking__progress span { display: block; width: 50%; height: 100%; background: var(--green); border-radius: 8px; }
+  .booking__steps { padding-left: 22px; margin: 0 0 36px; display: grid; gap: 10px; color: var(--text-muted); font-size: 1.05rem; }
+  .booking__steps li::marker { color: var(--green); }
+  .booking__side { display: grid; gap: 24px; }
+  @media (max-width: 960px) {
+    .booking { grid-template-columns: 1fr; }
+  }
+</style>

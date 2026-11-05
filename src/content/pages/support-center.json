@@ -1,0 +1,15 @@
+{
+  "seo": {
+    "title": "Support Center | Fused Technologies",
+    "description": "Get technical support from the Fused Technologies help desk by phone or email."
+  },
+  "hero": { "title": "Support Center" },
+  "heading": "Welcome to Our Support Center",
+  "intro": "Please use the following contact information for technical support requests only. For all other inquiries please use the information and form on the",
+  "hoursHeading": "Business Hours Support",
+  "hours": [
+    "The help desk is actively staffed from 8am-6pm.",
+    "The fastest way to receive support is by phone, where someone will be available to assist within 90 seconds.",
+    "All other methods will receive a response in less than 2 hours."
+  ]
+}

@@ -1,0 +1,77 @@
+---
+/*
+ * Short sidebar form. It collects a first name and email, then sends the
+ * visitor to the full booking form with those fields filled in.
+ */
+interface Props {
+  heading?: string;
+}
+const { heading = 'Schedule an Appointment Today' } = Astro.props;
+const steps = [
+  'Fill in our quick form',
+  'We’ll schedule an introductory phone call',
+  'We’ll take the time to listen and plan the next steps',
+];
+---
+<aside class="quick">
+  <h2 class="quick__head">{heading}</h2>
+  <div class="quick__body">
+    <ul>{steps.map((s) => <li>{s}</li>)}</ul>
+    <p class="quick__lead">Enter your name and email to get started today.</p>
+    <form action="/schedule-an-appointment" method="get">
+      <label class="visually-hidden" for="quick-name">First Name</label>
+      <input id="quick-name" name="name" type="text" placeholder="First Name" autocomplete="given-name" />
+      <label class="visually-hidden" for="quick-email">Business Email</label>
+      <input id="quick-email" name="email" type="email" placeholder="Business Email *" autocomplete="email" required />
+      <button type="submit" class="btn btn--green">Continue</button>
+    </form>
+  </div>
+</aside>
+
+<style>
+  .quick {
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--green-tint);
+    position: sticky;
+    top: 24px;
+  }
+  .quick__head {
+    position: relative;
+    background: var(--navy);
+    color: var(--white);
+    font-family: var(--font-sub);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-align: center;
+    font-size: 1.15rem;
+    line-height: 1.4;
+    padding: 26px 24px;
+    margin: 0;
+  }
+  .quick__head::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -9px;
+    margin-left: -10px;
+    border: 10px solid transparent;
+    border-bottom: 0;
+    border-top-color: var(--navy);
+  }
+  .quick__body { padding: 28px 24px 28px; }
+  .quick ul { margin: 0 0 20px; padding-left: 18px; display: grid; gap: 10px; }
+  .quick li::marker { color: var(--green); }
+  .quick__lead { font-weight: 600; font-size: 0.95rem; }
+  .quick form { display: grid; gap: 12px; }
+  .quick input {
+    font: inherit;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--white);
+    width: 100%;
+  }
+  .quick .btn { width: 100%; margin-top: 4px; }
+</style>

@@ -1,0 +1,39 @@
+---
+import { getPosts } from '../../../lib/posts';
+import Base from '../../../layouts/Base.astro';
+import PageHero from '../../../components/PageHero.astro';
+import PostList from '../../../components/PostList.astro';
+import BlogSidebar from '../../../components/BlogSidebar.astro';
+
+const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  const cats = [...new Set(posts.map((p) => p.data.category))];
+  return cats.map((c) => ({
+    params: { category: c.toLowerCase().replace(/[^a-z0-9]+/g, '-') },
+    props: {
+      name: c,
+      posts: posts.filter((p) => p.data.category === c),
+    },
+  }));
+}
+const { name, posts } = Astro.props;
+---
+<Base title={`${name} | Blog | Fused Technologies`} description={`${name} articles from the Fused Technologies blog.`}>
+  <PageHero title="Blog" subtitle={name} />
+  <section class="section">
+    <div class="container with-sidebar blog-layout">
+      <div>
+        <p class="back"><a href="/blog">← All posts</a></p>
+        <PostList posts={posts} />
+      </div>
+      <BlogSidebar />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .back { margin-bottom: 32px; }
+  .back a { color: var(--green); font-weight: 600; text-decoration: none; }
+</style>
