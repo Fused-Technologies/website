@@ -1,0 +1,97 @@
+{
+  "seo": {
+    "title": "Washington | Ultimate IT Protection Support | Fused Technologies",
+    "description": "Fused Technologies delivers security-first managed IT services, real-time support, and VoIP for businesses in Seattle and across Washington."
+  },
+  "hero": {
+    "eyebrow": "Simplify Technology, Do IT Right, and Keep Clients Happy",
+    "heading": "We Deliver Premier IT Services for Businesses in Washington",
+    "buttonLabel": "Schedule a Call",
+    "background": "/images/hero-seattle.jpg",
+    "partnerLogos": "/images/partner-logos.png",
+    "partnerLogosAlt": "Microsoft, Huntress and Veeam"
+  },
+  "results": {
+    "heading": "We Are Dedicated to Delivering Tangible Results for Every Client...",
+    "subheading": "And their Reviews Showcase Our Relentless Commitment to Excellence and Success"
+  },
+  "comparison": {
+    "heading": "What Is Security-First IT?",
+    "subheading": "Protecting Your Business From Cyber Threats with Proactive IT Services and Tailored Security Solutions",
+    "with": [
+      { "icon": "/images/icons/eye-gear.svg", "title": "24/7 Network Oversight", "text": "Our team continuously monitors your IT environment to prevent downtime and ensure security." },
+      { "icon": "/images/icons/strategy-board.svg", "title": "Tailored Protection Plans", "text": "We create cybersecurity strategies based on your specific challenges, protecting what matters most." },
+      { "icon": "/images/icons/shield-bug.svg", "title": "Swift Threat Mitigation", "text": "Addressing risks immediately, we minimize damage and secure your operations quickly." },
+      { "icon": "/images/icons/backup.svg", "title": "Reliable Backup Systems", "text": "We safeguard your critical data with robust, dependable backups and disaster recovery." }
+    ],
+    "without": [
+      { "icon": "/images/icons/bug-bomb.svg", "title": "Neglect Leads to Costly Breaches", "text": "Unchecked vulnerabilities expose your business to devastating financial and operational impacts." },
+      { "icon": "/images/icons/shield-x.svg", "title": "One-Size-Fits-All Security", "text": "Generic solutions fail to account for your unique IT requirements, leaving gaps in protection." },
+      { "icon": "/images/icons/snail.svg", "title": "Delayed Responses Compound Issues", "text": "Slow reactions to IT issues significantly escalate potential threats and increase recovery costs." },
+      { "icon": "/images/icons/data-loss.svg", "title": "Data Loss Erodes Trust", "text": "A data breach risks both your reputation and your clients’ confidence in your business." }
+    ]
+  },
+  "approach": {
+    "eyebrow": "Security-First IT:",
+    "heading": "The Fused Technologies Approach",
+    "image": "/images/icons/approach-shield.svg",
+    "items": [
+      { "icon": "/images/icons/hands-gear.svg", "title": "Customized IT Management", "text": "We analyze your workflows to provide solutions that address your specific operational needs." },
+      { "icon": "/images/icons/headset.svg", "title": "Accessible Real-Time Support", "text": "Our local team provides direct, human-first help when you need it most." },
+      { "icon": "/images/icons/umbrella.svg", "title": "Proactive Philosophy", "text": "We prevent issues before they escalate to reduce interruptions and enhance productivity." },
+      { "icon": "/images/icons/database-sync.svg", "title": "Built for Continuity", "text": "We design robust infrastructures that protect your business from outages and disruptions." }
+    ]
+  },
+  "waysToHelp": {
+    "heading": "IT that's Simple, Functional, and Keeps You Happy",
+    "subheading": "Here Are Three Ways We Can Help",
+    "items": [
+      {
+        "number": "01",
+        "icon": "/images/icons/way-01.svg",
+        "title": "Hire Us to Make Security the Focus of Your IT Strategy",
+        "intro": "",
+        "bullets": [
+          "Check out some of our success stories",
+          "Learn about the value Security-First IT adds to a business",
+          "See how our Security-First Managed IT Services and Projects will help you get more from your technology",
+          "Take the first step towards securing your business. Book an introductory call today"
+        ],
+        "linkLabel": "Schedule IT Consultation",
+        "linkHref": "/schedule-an-appointment"
+      },
+      {
+        "number": "02",
+        "icon": "/images/icons/way-02.svg",
+        "title": "Sign Up for Our Email List",
+        "intro": "Learn How A Security-First IT Strategy Benefits Your Company:",
+        "bullets": [
+          "The rundown of IT pricing, and which plans to consider.",
+          "What a contemporary IT security plan involves – and what you’re up against.",
+          "How IT can increase productivity, help you automate certain tasks, and most importantly, reduce your overhead."
+        ],
+        "linkLabel": "Sign Up for Free",
+        "linkHref": "/schedule-an-appointment"
+      },
+      {
+        "number": "03",
+        "icon": "/images/icons/way-03.svg",
+        "title": "Ask Us Anything",
+        "intro": "Do You Have Any Pressing Questions About Your IT or Need Guidance on a Small Project?",
+        "bullets": [],
+        "body": "We’re happy to help steer you in the right direction – with no obligations.",
+        "showContact": true,
+        "linkLabel": "Schedule IT Consultation",
+        "linkHref": "/schedule-an-appointment"
+      }
+    ]
+  },
+  "cta": {
+    "heading": "Need Reliable IT Solutions? Let’s Make IT Work Better For Your Business",
+    "text": "At Fused Technologies, we help Seattle businesses simplify and optimize their IT. With a focus on security, support, and tailored solutions, we partner with you to build efficient, reliable systems that enhance your growth.",
+    "callout": "Call (855) 607-0241 today or click the button below to schedule your appointment. We’re ready to jumpstart your IT journey.",
+    "image": "/images/cta-team.jpg",
+    "imageAlt": "Fused Technologies technicians working together at a desk",
+    "buttonLabel": "Schedule a Call"
+  }
+}

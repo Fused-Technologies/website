@@ -1,0 +1,92 @@
+---
+import site from '../content/site.json';
+
+const tel = (n: string) => 'tel:' + n.replace(/[^\d+]/g, '');
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <img src="/images/logo.png" alt={site.name} width="200" height="59" loading="lazy" />
+      <a href={site.ctaHref} class="btn btn--green btn--sm">{site.ctaLabel}</a>
+    </div>
+    <div>
+      <h2 class="footer__title">Company</h2>
+      <ul>{site.footerCompany.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+    </div>
+    <div>
+      <h2 class="footer__title">Client Support</h2>
+      <ul>
+        <li><a href={tel(site.clientSupport.phone)}>{site.clientSupport.phone}</a></li>
+        <li><a href={`mailto:${site.clientSupport.email}`}>{site.clientSupport.email}</a></li>
+        <li><a href="/support-center">Support Center</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="footer__title">Sales Inquiries</h2>
+      <ul>
+        <li><a href={tel(site.sales.phone)}>{site.sales.phone}</a></li>
+        <li><a href={`mailto:${site.sales.email}`}>{site.sales.email}</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="container footer__bottom-inner">
+      <p>© {year} {site.name}. <a href="/privacy-policy">Privacy Policy</a></p>
+      <div class="footer__social">
+        {site.social.x && (
+          <a href={site.social.x} aria-label="Fused Technologies on X" target="_blank" rel="noopener">
+            <img src="/images/icons/social-x.svg" alt="" width="22" height="22" />
+          </a>
+        )}
+        {site.social.facebook && (
+          <a href={site.social.facebook} aria-label="Fused Technologies on Facebook" target="_blank" rel="noopener">
+            <img src="/images/icons/social-facebook.svg" alt="" width="22" height="22" />
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer { background: var(--navy); color: var(--white); }
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1.2fr 1.1fr;
+    gap: 40px;
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+  .footer__brand { display: flex; flex-direction: column; align-items: flex-start; gap: 28px; }
+  .footer__brand img { width: 200px; }
+  .footer__title {
+    font-family: var(--font-sub);
+    font-weight: 400;
+    font-size: 1.35rem;
+    margin-bottom: 20px;
+  }
+  .footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .footer ul a { text-decoration: none; color: rgba(255, 255, 255, 0.9); }
+  .footer ul a:hover { color: var(--green); }
+  .footer__bottom { border-top: 1px solid rgba(255, 255, 255, 0.15); font-size: 0.875rem; }
+  .footer__bottom-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    min-height: 64px;
+  }
+  .footer__bottom p { margin: 0; }
+  .footer__social { display: flex; gap: 14px; }
+  .footer__social a:hover { opacity: 0.8; }
+
+  @media (max-width: 900px) {
+    .footer__grid { grid-template-columns: 1fr 1fr; }
+    .footer__brand { grid-column: 1 / -1; }
+  }
+  @media (max-width: 520px) {
+    .footer__grid { grid-template-columns: 1fr; padding-top: 48px; padding-bottom: 48px; }
+    .footer__bottom-inner { flex-direction: column; justify-content: center; padding: 20px 16px; text-align: center; }
+  }
+</style>

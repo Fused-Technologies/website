@@ -1,0 +1,27 @@
+{
+  "name": "Fused Technologies",
+  "clientSupport": { "phone": "(206) 973-5580", "email": "support@fusedtechnologies.com" },
+  "sales": { "phone": "(855) 607-0241", "email": "info@fusedtechnologies.com" },
+  "social": {
+    "facebook": "https://www.facebook.com/profile.php?id=100072232809271",
+    "x": ""
+  },
+  "nav": [
+    { "label": "Home", "href": "/" },
+    { "label": "Reviews", "href": "/reviews" },
+    { "label": "Security-First IT", "href": "/security-first-it" },
+    { "label": "VoIP", "href": "/voip" },
+    { "label": "About", "href": "/about-us" }
+  ],
+  "topNav": [
+    { "label": "Blog", "href": "/blog" },
+    { "label": "Support Center", "href": "/support-center" }
+  ],
+  "footerCompany": [
+    { "label": "About", "href": "/about-us" },
+    { "label": "Security-First IT", "href": "/security-first-it" },
+    { "label": "Reviews", "href": "/reviews" }
+  ],
+  "ctaLabel": "Schedule a Call",
+  "ctaHref": "/schedule-an-appointment"
+}

@@ -1,0 +1,235 @@
+---
+import Base from '../layouts/Base.astro';
+import Testimonials from '../components/Testimonials.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import home from '../content/home.json';
+import site from '../content/site.json';
+
+const { hero, results, comparison, approach, waysToHelp, cta } = home;
+const tel = (n: string) => 'tel:' + n.replace(/[^\d+]/g, '');
+---
+<Base title={home.seo.title} description={home.seo.description}>
+  <!-- Hero -->
+  <section class="hero" style={`--hero-bg: url('${hero.background}')`}>
+    <div class="container hero__inner">
+      <p class="hero__eyebrow">{hero.eyebrow}</p>
+      <h1>{hero.heading}</h1>
+      <a href={site.ctaHref} class="btn btn--green">{hero.buttonLabel}</a>
+      <img class="hero__logos" src={hero.partnerLogos} alt={hero.partnerLogosAlt} width="800" height="58" />
+    </div>
+  </section>
+
+  <!-- Results / testimonials -->
+  <section class="section section--gray">
+    <div class="container">
+      <div class="section-head">
+        <h2>{results.heading}</h2>
+        <p>{results.subheading}</p>
+      </div>
+      <Testimonials />
+    </div>
+  </section>
+
+  <!-- With vs. without Security-First IT -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>{comparison.heading}</h2>
+        <p>{comparison.subheading}</p>
+      </div>
+      <div class="compare">
+        <div>
+          <h3 class="compare__title">When <u class="good">You Have</u> Security-First IT</h3>
+          <div class="compare__list">
+            {comparison.with.map((c) => (
+              <article class="card card--good">
+                <img src={c.icon} alt="" width="56" height="56" />
+                <h4>{c.title}</h4>
+                <p>{c.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+        <div>
+          <h3 class="compare__title">When <u class="bad">You Don’t Have</u> Security-First IT</h3>
+          <div class="compare__list">
+            {comparison.without.map((c) => (
+              <article class="card card--bad">
+                <img src={c.icon} alt="" width="56" height="56" />
+                <h4>{c.title}</h4>
+                <p>{c.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Approach -->
+  <section class="section section--gray">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">{approach.eyebrow}</p>
+        <h2>{approach.heading}</h2>
+      </div>
+      <div class="approach">
+        <div class="approach__col">
+          {approach.items.slice(0, 2).map((a) => (
+            <div class="approach__item">
+              <img src={a.icon} alt="" width="60" height="60" />
+              <h3>{a.title}</h3>
+              <p>{a.text}</p>
+            </div>
+          ))}
+        </div>
+        <img class="approach__shield" src={approach.image} alt="" width="364" height="420" />
+        <div class="approach__col">
+          {approach.items.slice(2).map((a) => (
+            <div class="approach__item">
+              <img src={a.icon} alt="" width="60" height="60" />
+              <h3>{a.title}</h3>
+              <p>{a.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Three ways we can help -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>{waysToHelp.heading}</h2>
+        <p class="eyebrow">{waysToHelp.subheading}</p>
+      </div>
+      <div class="ways">
+        {waysToHelp.items.map((w) => (
+          <article class="way">
+            <img class="way__badge" src={w.icon} alt="" width="129" height="96" />
+            <div class="way__body">
+              <p class="way__number">{w.number}</p>
+              <h3>{w.title}</h3>
+              {w.intro && <p class="way__intro">{w.intro}</p>}
+              {w.bullets.length > 0 && <ul>{w.bullets.map((b) => <li>{b}</li>)}</ul>}
+              {w.body && <p>{w.body}</p>}
+              {w.showContact && (
+                <p>
+                  Call <a class="inline-link" href={tel(site.sales.phone)}>{site.sales.phone}</a> or email{' '}
+                  <a class="inline-link" href={`mailto:${site.sales.email}`}>{site.sales.email}</a>
+                </p>
+              )}
+              <a href={w.linkHref} class="text-link">{w.linkLabel}</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBanner {...cta} />
+</Base>
+
+<style>
+  /* Hero */
+  .hero {
+    position: relative;
+    color: var(--white);
+    background:
+      linear-gradient(rgba(29, 35, 92, 0.78), rgba(48, 38, 110, 0.72)),
+      var(--hero-bg) center / cover no-repeat;
+    padding: 260px 0 90px;
+    text-align: center;
+  }
+  .hero__eyebrow {
+    font-family: var(--font-sub);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: clamp(0.95rem, 1.6vw, 1.5rem);
+    margin-bottom: 20px;
+  }
+  .hero h1 { max-width: 1060px; margin: 0 auto 48px; }
+  .hero__logos { width: min(800px, 100%); margin: 56px auto 0; opacity: 0.9; }
+
+  /* Comparison */
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .compare__title { font-size: 1.4rem; margin-bottom: 36px; }
+  .compare__title u { text-underline-offset: 5px; text-decoration-thickness: 2px; }
+  .good { color: var(--green); }
+  .bad { color: var(--red); }
+  .compare__list { display: grid; gap: 28px; }
+  .card { border-radius: var(--radius); padding: 32px 40px; min-height: 236px; }
+  .card--good { background: var(--green-tint); }
+  .card--bad { background: var(--gray-bg); }
+  .card img { width: 56px; height: 56px; margin-bottom: 32px; }
+  .card h4 { font-size: 1.3rem; margin-bottom: 12px; }
+  .card p { margin: 0; color: var(--text-muted); font-size: 0.95rem; }
+
+  /* Approach */
+  .approach {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .approach__col { display: grid; gap: 56px; }
+  .approach__item img { width: 60px; height: 60px; margin-bottom: 20px; }
+  .approach__item h3 { font-size: 1.35rem; }
+  .approach__item p { color: var(--text-muted); margin: 0; }
+  .approach__shield { width: 364px; }
+
+  /* Ways to help */
+  .ways { display: grid; gap: 48px; }
+  .way {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 24px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 40px;
+  }
+  .way__badge { width: 140px; height: auto; }
+  .way .way__number {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 2.6rem;
+    color: var(--blue);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .way h3 {
+    font-family: var(--font-sub);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+  }
+  .way__intro { font-size: 1.1rem; }
+  .way ul { margin: 0 0 32px; padding-left: 34px; display: grid; gap: 8px; }
+  .way li::marker { color: var(--green); }
+  .way p { color: var(--text-muted); }
+  .inline-link { color: var(--green); font-weight: 600; text-decoration: none; }
+  .inline-link:hover { text-decoration: underline; }
+
+  @media (max-width: 1024px) {
+    .hero { padding-top: 170px; }
+    .approach { grid-template-columns: 1fr 1fr; }
+    .approach__shield { grid-row: 1; grid-column: 1 / -1; justify-self: center; width: 280px; }
+  }
+  @media (max-width: 768px) {
+    .hero { padding: 150px 0 64px; }
+    .hero h1 { margin-bottom: 36px; }
+    .compare { grid-template-columns: 1fr; gap: 56px; }
+    .card { padding: 28px 24px; min-height: 0; }
+    .card img { margin-bottom: 20px; }
+    .approach { grid-template-columns: 1fr; gap: 40px; }
+    .approach__col { gap: 40px; }
+    .approach__shield { width: 240px; }
+    .way { grid-template-columns: 1fr; padding: 28px 22px; }
+    .way__badge { width: 110px; }
+    .way .way__number { display: none; }
+    .way h3 { font-size: 1.25rem; }
+    .way ul { padding-left: 20px; }
+  }
+</style>
