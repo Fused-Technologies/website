@@ -136,9 +136,8 @@ const tel = (n: string) => 'tel:' + n.replace(/[^\d+]/g, '');
   .hero {
     position: relative;
     color: var(--white);
-    background:
-      linear-gradient(rgba(23, 33, 82, 0.55), rgba(52, 40, 120, 0.55)),
-      var(--hero-bg) center / cover no-repeat;
+    /* The photo already has the brand tint baked in, so no overlay is needed */
+    background: var(--navy) var(--hero-bg) center / cover no-repeat;
     padding: 260px 0 120px;
     text-align: center;
   }
